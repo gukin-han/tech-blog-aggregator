@@ -31,6 +31,14 @@ jobs:
     - name: Run Tests
       run: ./gradlew test
 
+    # 테스트 리포트를 업로드하는 단계
+    - name: Upload test results
+      if: failure()  # 테스트가 실패했을 때만 리포트를 업로드
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: build/reports/tests/test
+
   dependency-submission:
 
     runs-on: ubuntu-latest
