@@ -42,3 +42,11 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.withType(Test) {
+	useJUnitPlatform {
+		if (System.getenv("CI") == "true") {
+			excludeTags 'integration'
+		}
+	}
+}
